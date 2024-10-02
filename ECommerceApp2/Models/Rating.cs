@@ -13,5 +13,11 @@ namespace ECommerceApp2.Models
         public string CustomerId { get; set; }
         public int Stars { get; set; } // 1 to 5
         public string Comment { get; set; }
+
+        // Constructor to automatically generate an ID
+        public Rating()
+        {
+            Id = ObjectId.GenerateNewId().ToString(); // Generate a new unique ObjectId
+        }
     }
 }

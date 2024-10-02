@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// ECommerceApp.Controllers/InventoryController.cs
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;
 using ECommerceApp2.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace ECommerceApp.Controllers
 {
@@ -16,6 +18,8 @@ namespace ECommerceApp.Controllers
         {
             _inventoryService = inventoryService;
         }
+
+        // Existing endpoints...
 
         // GET api/inventory/{productId}
         [HttpGet("{productId}")]
@@ -55,6 +59,19 @@ namespace ECommerceApp.Controllers
         {
             await _inventoryService.DeleteInventoryAsync(productId);
             return Ok("Inventory deleted successfully.");
+        }
+
+        // New endpoint to get low stock inventories
+        // GET api/inventory/lowstock
+        [HttpGet("lowstock/details")]
+        public async Task<IActionResult> GetLowStockProductsWithDetails()
+        {
+            var lowStockProducts = await _inventoryService.GetLowStockProductsAsync();
+
+            if (lowStockProducts == null || lowStockProducts.Count == 0)
+                return Ok("No products are currently below the low stock threshold.");
+
+            return Ok(lowStockProducts);
         }
     }
 }

@@ -1,16 +1,19 @@
 ﻿using ECommerceApp2.Models;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ECommerceApp2.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetUserByIdAsync(string id);
-        Task<User> GetUserByUsernameAsync(string username);
-        Task CreateUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(string id);
-        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> GetUserById(string id);
+        Task<User> GetUserByEmail(string email);
+        Task<List<User>> GetAllUsers();
+        Task AddUser(User user);
+        Task UpdateUser(User user);
+        Task DeleteUser(string id);
+
+        // Optional: Specific Methods
+        Task UpdateUserStatus(string id, bool isActive);
     }
 }

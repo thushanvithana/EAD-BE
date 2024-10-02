@@ -4,7 +4,6 @@ using MongoDB.Driver;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-
 namespace ECommerceApp2.Repositories.Implementations
 {
     public class ProductRepository : IProductRepository
@@ -52,6 +51,12 @@ namespace ECommerceApp2.Repositories.Implementations
         {
             return await _products.Find(p => p.IsActive).ToListAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetDeactivatedProductsAsync() // Implementation
+        {
+            return await _products.Find(p => !p.IsActive).ToListAsync();
+        }
+
 
         public async Task ActivateProductAsync(string productId)
         {

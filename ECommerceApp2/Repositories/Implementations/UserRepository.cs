@@ -1,8 +1,8 @@
-﻿using ECommerceApp2.Repositories.Interfaces;
-using ECommerceApp2.Models;
+﻿using ECommerceApp2.Models;
+using ECommerceApp2.Repositories.Interfaces;
 using MongoDB.Driver;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ECommerceApp2.Repositories.Implementations
 {
@@ -10,41 +10,46 @@ namespace ECommerceApp2.Repositories.Implementations
     {
         private readonly IMongoCollection<User> _users;
 
-        public UserRepository(IMongoDbSettings settings)
+        public UserRepository(IMongoDatabase database)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
             _users = database.GetCollection<User>("Users");
         }
 
-        public async Task<User> GetUserByIdAsync(string id)
+        public async Task<User> GetUserById(string id)
         {
-            return await _users.Find(u => u.Id == id).FirstOrDefaultAsync();
+            return await _users.Find(user => user.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<User> GetUserByUsernameAsync(string username)
+        public async Task<User> GetUserByEmail(string email)
         {
-            return await _users.Find(u => u.Username == username).FirstOrDefaultAsync();
+            return await _users.Find(user => user.Email == email).FirstOrDefaultAsync();
         }
 
-        public async Task CreateUserAsync(User user)
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _users.Find(_ => true).ToListAsync();
+        }
+
+        public async Task AddUser(User user)
         {
             await _users.InsertOneAsync(user);
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task UpdateUser(User user)
         {
             await _users.ReplaceOneAsync(u => u.Id == user.Id, user);
         }
 
-        public async Task DeleteUserAsync(string id)
+        public async Task DeleteUser(string id)
         {
-            await _users.DeleteOneAsync(u => u.Id == id);
+            await _users.DeleteOneAsync(user => user.Id == id);
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        // Optional: Specific Method Implementation
+        public async Task UpdateUserStatus(string id, bool isActive)
         {
-            return await _users.Find(_ => true).ToListAsync();
+            var update = Builders<User>.Update.Set(u => u.IsActive, isActive);
+            await _users.UpdateOneAsync(u => u.Id == id, update);
         }
     }
 }

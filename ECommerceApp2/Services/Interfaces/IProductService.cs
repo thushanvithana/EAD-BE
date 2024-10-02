@@ -20,8 +20,18 @@ namespace ECommerceApp2.Services.Interfaces
 
         Task<IEnumerable<Product>> GetActiveProductsAsync();
 
+        Task<IEnumerable<Product>> GetDeactivatedProductsAsync(); // New Method
+
+
         Task ActivateProductAsync(string productId);
 
         Task DeactivateProductAsync(string productId);
+
+
+        // New method signatures for managing images
+        Task AddImageAsync(string productId, string imageUrl);
+        Task RemoveImageAsync(string productId, string imageUrl);
+
+
     }
 }

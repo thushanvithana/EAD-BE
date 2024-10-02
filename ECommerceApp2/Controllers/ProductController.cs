@@ -87,5 +87,80 @@ namespace ECommerceApp.Controllers
             var products = await _productService.GetActiveProductsAsync();
             return Ok(products);
         }
+
+
+
+        // POST api/product/{productId}/images
+        [HttpPut("{productId}/images")]
+        public async Task<IActionResult> AddImage(string productId, [FromBody] string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+                return BadRequest("Image URL cannot be null or empty.");
+
+            try
+            {
+                await _productService.AddImageAsync(productId, imageUrl);
+                return Ok("Image updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // GET api/product/all
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            try
+            {
+                var products = await _productService.GetAllProductsAsync();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // GET api/product/deactivated
+        [HttpGet("deactivated")]
+        public async Task<IActionResult> GetDeactivatedProducts()
+        {
+            try
+            {
+                var products = await _productService.GetDeactivatedProductsAsync();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+
+        // DELETE api/product/{productId}/images
+        [HttpDelete("{productId}/images")]
+        public async Task<IActionResult> RemoveImage(string productId, [FromBody] string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+                return BadRequest("Image URL cannot be null or empty.");
+
+            try
+            {
+                await _productService.RemoveImageAsync(productId, imageUrl);
+                return Ok("Image removed successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

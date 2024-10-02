@@ -20,6 +20,8 @@ namespace ECommerceApp2.Repositories.Interfaces
 
         Task<IEnumerable<Product>> GetActiveProductsAsync();
 
+        Task<IEnumerable<Product>> GetDeactivatedProductsAsync(); // New Method
+
         Task ActivateProductAsync(string productId);
 
         Task DeactivateProductAsync(string productId);

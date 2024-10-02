@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿// ECommerceApp2.Repositories.Implementations/InventoryRepository.cs
+using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
@@ -34,6 +36,13 @@ namespace ECommerceApp2.Repositories.Implementations
         public async Task DeleteInventoryAsync(string productId)
         {
             await _inventories.DeleteOneAsync(i => i.ProductId == productId);
+        }
+
+        // Implementation of the new method
+        public async Task<List<Inventory>> GetLowStockInventoriesAsync()
+        {
+            var allInventories = await _inventories.Find(_ => true).ToListAsync();
+            return allInventories.FindAll(i => i.AvailableStock < i.LowStockThreshold);
         }
     }
 }

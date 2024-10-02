@@ -7,16 +7,58 @@ using ECommerceApp2.Services.Interfaces;
 using ECommerceApp2.Services.Implementations;
 using Microsoft.Extensions.Configuration;
 using ECommerceApp2.Models;
+using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure services
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+
+// Add CORS services to allow any origin, method, and header
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+// Add EmailSettings configuration
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddSingleton<IEmailSettings>(sp =>
+    sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<EmailSettings>>().Value);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Configure MongoDB settings
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
 
 builder.Services.AddSingleton<IMongoDbSettings>(sp =>
     sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+
+// Register MongoClient and IMongoDatabase
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+    return new MongoClient(settings.ConnectionString);
+});
+
+builder.Services.AddScoped<IMongoDatabase>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+    var client = sp.GetRequiredService<IMongoClient>();
+    return client.GetDatabase(settings.DatabaseName);
+});
 
 // Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -26,6 +68,8 @@ builder.Services.AddScoped<IVendorRepository, VendorRepository>();
 builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();  // Enable this line
+builder.Services.AddScoped<IVendorRepository, VendorRepository>();
 
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
@@ -35,6 +79,11 @@ builder.Services.AddScoped<IVendorService, VendorService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();  // Enable this line
+builder.Services.AddScoped<IVendorService, VendorService>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +96,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

@@ -1,4 +1,7 @@
-﻿using ECommerceApp2.Models;
+﻿// ECommerceApp2.Services.Interfaces/IInventoryService.cs
+using ECommerceApp2.DTOs;
+using ECommerceApp2.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ECommerceApp2.Services.Interfaces
@@ -12,5 +15,8 @@ namespace ECommerceApp2.Services.Interfaces
         Task<bool> IsStockAvailableAsync(string productId, int quantity);
         Task DecreaseStockAsync(string productId, int quantity);
         Task IncreaseStockAsync(string productId, int quantity);
+
+        // New method to get low stock inventories
+        Task<List<LowStockProductDto>> GetLowStockProductsAsync();
     }
 }

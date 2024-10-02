@@ -1,17 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿// ECommerceApp2.Services.Implementations/InventoryService.cs
 using ECommerceApp2.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;
+using ECommerceApp2.DTOs;
 
 namespace ECommerceApp2.Services.Implementations
 {
     public class InventoryService : IInventoryService
     {
         private readonly IInventoryRepository _inventoryRepository;
+        private readonly IProductService _productService; // Inject ProductService
 
-        public InventoryService(IInventoryRepository inventoryRepository)
+        public InventoryService(IInventoryRepository inventoryRepository, IProductService productService)
         {
             _inventoryRepository = inventoryRepository;
+            _productService = productService;
         }
 
         public async Task<Inventory> GetInventoryByProductIdAsync(string productId)
@@ -67,5 +72,42 @@ namespace ECommerceApp2.Services.Implementations
                 throw new System.Exception("Inventory not found.");
             }
         }
+
+        // Implementation of the new method
+        public async Task<List<LowStockProductDto>> GetLowStockProductsAsync()
+        {
+            // Fetch low stock inventories
+            var lowStockInventories = await _inventoryRepository.GetLowStockInventoriesAsync();
+
+            if (lowStockInventories == null || lowStockInventories.Count == 0)
+                return new List<LowStockProductDto>();
+
+            var lowStockProducts = new List<LowStockProductDto>();
+
+            foreach (var inventory in lowStockInventories)
+            {
+                // Fetch product details
+                var product = await _productService.GetProductByIdAsync(inventory.ProductId);
+                if (product != null)
+                {
+                    lowStockProducts.Add(new LowStockProductDto
+                    {
+                        ProductId = product.ProductId,
+                        Name = product.Name,
+                        Category = product.Category,
+                        VendorId = product.VendorId,
+                        IsActive = product.IsActive,
+                        Price = product.Price,
+                        Description = product.Description,
+                        AvailableStock = inventory.AvailableStock,
+                        LowStockThreshold = inventory.LowStockThreshold
+                    });
+                }
+            }
+
+            return lowStockProducts;
+        }
     }
 }
+    
+
