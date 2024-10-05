@@ -13,5 +13,12 @@ namespace ECommerceApp2.Services.Interfaces
         Task UpdateOrderAsync(Order order);
         Task CancelOrderAsync(string orderId, string cancellationReason);
         Task MarkItemAsReadyForDelivery(string orderId, string productId, string vendorId);
+        Task<OrderWithDetailsDto> GetOrderWithDetailsByIdAsync(string orderId);
+        Task<Order> CreateOrderWithEmailAsync(CreateOrderRequest request);
+
+        Task<IEnumerable<OrderWithDetailsDto>> GetAllOrdersWithDetailsAsync();
+
+
+
     }
 }

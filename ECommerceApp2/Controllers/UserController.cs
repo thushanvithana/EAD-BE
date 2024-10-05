@@ -20,10 +20,23 @@ namespace ECommerceApp2.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
             try
             {
+                var user = new User
+                {
+                    Username = registerRequest.Username,
+                    Email = registerRequest.Email,
+                    Password = registerRequest.Password,
+                    Role = registerRequest.Role,
+                    FirstName = registerRequest.FirstName,
+                    LastName = registerRequest.LastName, 
+                    Address = registerRequest.Address, // Single string
+                    PhoneNumber = registerRequest.PhoneNumber,
+                    Gender = registerRequest.Gender
+                };
+
                 var createdUser = await _userService.Register(user);
                 return Ok(createdUser);
             }
@@ -65,6 +78,22 @@ namespace ECommerceApp2.Controllers
             return Ok(users);
         }
 
+        // New Endpoint: Get all activated users
+        [HttpGet("activated")]
+        public async Task<IActionResult> GetActivatedUsers()
+        {
+            var activatedUsers = await _userService.GetActivatedUsers();
+            return Ok(activatedUsers);
+        }
+
+        // New Endpoint: Get all deactivated users
+        [HttpGet("deactivated")]
+        public async Task<IActionResult> GetDeactivatedUsers()
+        {
+            var deactivatedUsers = await _userService.GetDeactivatedUsers();
+            return Ok(deactivatedUsers);
+        }
+
         // New Endpoint: Activate User
         [HttpPost("{id}/activate")]
         // [Authorize(Roles = "Administrator")] // Uncomment to secure the endpoint
@@ -96,11 +125,74 @@ namespace ECommerceApp2.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        // Optional: Update User Endpoint
+        [HttpPut("{id}")]
+        // [Authorize(Roles = "Administrator")] // Uncomment to secure the endpoint
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserRequest updateUserRequest)
+        {
+            try
+            {
+                var user = new User
+                {
+                    Id = id,
+                    Username = updateUserRequest.Username,
+                    Email = updateUserRequest.Email,
+                    Role = updateUserRequest.Role,
+                    FirstName = updateUserRequest.FirstName,
+                    LastName = updateUserRequest.LastName,
+                    Address = updateUserRequest.Address, // Single string
+                    PhoneNumber = updateUserRequest.PhoneNumber,
+                    Gender = updateUserRequest.Gender,
+                    IsActive = updateUserRequest.IsActive
+                };
+
+                await _userService.UpdateUser(user);
+                return Ok(new { message = "User updated successfully." });
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 
     public class LoginRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }
+    }
+
+    // New DTO for Registration
+    public class RegisterRequest
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public UserRole Role { get; set; }
+
+        // New Fields
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; } // Single string
+        public string PhoneNumber { get; set; }
+        public Gender Gender { get; set; }
+    }
+
+    // Optional DTO for Updating User
+    public class UpdateUserRequest
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public UserRole Role { get; set; }
+
+        // New Fields
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; } // Single string
+        public string PhoneNumber { get; set; }
+        public Gender Gender { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

@@ -12,6 +12,14 @@ namespace ECommerceApp2.Models
         Customer       //3
     }
 
+    public enum Gender
+    {
+        Male, //0
+        Female,//1
+        Other,//2
+        PreferNotToSay//3
+    }
+
     public class User
     {
         [BsonId]
@@ -24,7 +32,15 @@ namespace ECommerceApp2.Models
         public UserRole Role { get; set; }
 
         public bool IsActive { get; set; } // New Field
-
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        // New Fields
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; } // Changed from Address object to single string
+        public string PhoneNumber { get; set; }
+        public Gender Gender { get; set; }
+
+   
     }
 }

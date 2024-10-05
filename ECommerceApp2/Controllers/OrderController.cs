@@ -63,6 +63,35 @@ namespace ECommerceApp2.Controllers
             return NoContent();
         }
 
+
+
+        [HttpPost("create-with-email")]
+        public async Task<ActionResult> CreateOrderWithEmail([FromBody] CreateOrderRequest request)
+        {
+            // Call service to create order with email
+            var order = await _orderService.CreateOrderWithEmailAsync(request);
+            return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
+        }
+
+
+        [HttpGet("{id}/detailed-items")]
+        public async Task<ActionResult<OrderWithDetailsDto>> GetOrderWithDetails(string id)
+        {
+            var orderWithDetailsDto = await _orderService.GetOrderWithDetailsByIdAsync(id);
+            if (orderWithDetailsDto == null) return NotFound();
+            return Ok(orderWithDetailsDto);
+        }
+
+
+        [HttpGet("GetAll-detailed")]
+        public async Task<ActionResult<IEnumerable<OrderWithDetailsDto>>> GetAllOrdersWithDetails()
+        {
+            var ordersWithDetails = await _orderService.GetAllOrdersWithDetailsAsync();
+            return Ok(ordersWithDetails);
+        }
+
+
+
         [HttpPost("{id}/ready-for-delivery")]
         public async Task<ActionResult> MarkItemAsReadyForDelivery(string id, [FromQuery] string productId, [FromQuery] string vendorId)
         {

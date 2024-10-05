@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;
+using ECommerceApp2.Repositories.Implementations;
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;
 
@@ -11,11 +12,13 @@ namespace ECommerceApp2.Services.Implementations
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IUserRepository _userRepository;  // Add this field
 
-        public OrderService(IOrderRepository orderRepository, IProductRepository productRepository)
+        public OrderService(IOrderRepository orderRepository, IProductRepository productRepository, IUserRepository userRepository)
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
+            _userRepository = userRepository;  // Assign user repository
         }
 
         public async Task CreateOrderAsync(Order order)
@@ -49,6 +52,37 @@ namespace ECommerceApp2.Services.Implementations
             return orderDtos;
         }
 
+
+        public async Task<Order> CreateOrderWithEmailAsync(CreateOrderRequest request)
+        {
+            // Find user by email
+            var user = await _userRepository.GetUserByEmailAsync(request.CustomerEmail);
+            if (user == null)
+                throw new KeyNotFoundException("Customer not found with the given email.");
+
+            // Create a new order
+            var order = new Order
+            {
+                CustomerId = user.Id, // Set CustomerId from User
+                Items = request.Items.Select(item => new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    VendorId = item.VendorId,
+                    Quantity = item.Quantity,
+                    IsDelivered = false, // Default to not delivered
+                }).ToList(),
+                Note = request.Note
+            };
+
+            // Calculate the total value
+            order.TotalValue = await CalculateTotalValueAsync(order);
+
+            // Insert order into database
+            await _orderRepository.CreateOrderAsync(order);
+
+            return order;
+        }
+
         public async Task<IEnumerable<OrderDto>> GetAllOrdersAsync()
         {
             var orders = await _orderRepository.GetAllOrdersAsync();
@@ -62,6 +96,7 @@ namespace ECommerceApp2.Services.Implementations
 
             return orderDtos;
         }
+
 
         public async Task UpdateOrderAsync(Order order)
         {
@@ -133,6 +168,116 @@ namespace ECommerceApp2.Services.Implementations
 
             return total;
         }
+
+
+
+        public async Task<OrderWithDetailsDto> GetOrderWithDetailsByIdAsync(string orderId)
+        {
+            var order = await _orderRepository.GetOrderByIdAsync(orderId);
+            if (order == null) return null;
+
+            var detailedItems = new List<OrderItemWithDetailsDto>();
+
+            foreach (var item in order.Items)
+            {
+                var product = await _productRepository.GetProductByIdAsync(item.ProductId);
+                var vendor = await _userRepository.GetUserByIdAsync(item.VendorId); // Assume you have user repository to get vendor details
+
+                if (product != null && vendor != null)
+                {
+                    detailedItems.Add(new OrderItemWithDetailsDto
+                    {
+                        Product = new ProductDto
+                        {
+                            ProductId = product.ProductId,
+                            Name = product.Name,
+                            Price = product.Price,
+                            Description = product.Description,
+                            Stock = product.Stock,
+                            ImageUrls = product.ImageUrls
+                        },
+                        Vendor = new VendorDto
+                        {
+                            VendorId = vendor.Id,
+                            VendorName = vendor.FirstName + " " + vendor.LastName,
+                            Email = vendor.Email,
+                            PhoneNumber = vendor.PhoneNumber,
+                        },
+                        Quantity = item.Quantity,
+                        IsDelivered = item.IsDelivered
+                    });
+                }
+            }
+
+            return new OrderWithDetailsDto
+            {
+                Id = order.Id,
+                CustomerId = order.CustomerId,
+                Items = detailedItems,
+                Status = order.Status,
+                Note = order.Note,
+                CancellationReason = order.CancellationReason,
+                CreatedAt = order.CreatedAt,
+                TotalValue = await CalculateTotalValueAsync(order) // Reuse existing logic
+            };
+        }
+
+        public async Task<IEnumerable<OrderWithDetailsDto>> GetAllOrdersWithDetailsAsync()
+        {
+            var orders = await _orderRepository.GetAllOrdersAsync();
+            var ordersWithDetailsDtos = new List<OrderWithDetailsDto>();
+
+            foreach (var order in orders)
+            {
+                var detailedItems = new List<OrderItemWithDetailsDto>();
+
+                foreach (var item in order.Items)
+                {
+                    var product = await _productRepository.GetProductByIdAsync(item.ProductId);
+                    var vendor = await _userRepository.GetUserByIdAsync(item.VendorId); // Adjust if necessary
+
+                    if (product != null && vendor != null)
+                    {
+                        detailedItems.Add(new OrderItemWithDetailsDto
+                        {
+                            Product = new ProductDto
+                            {
+                                ProductId = product.ProductId,
+                                Name = product.Name,
+                                Price = product.Price,
+                                Description = product.Description,
+                                Stock = product.Stock,
+                                ImageUrls = product.ImageUrls
+                            },
+                            Vendor = new VendorDto
+                            {
+                                VendorId = vendor.Id,
+                                VendorName = vendor.FirstName + " " + vendor.LastName,
+                                Email = vendor.Email,
+                                PhoneNumber = vendor.PhoneNumber,
+                            },
+                            Quantity = item.Quantity,
+                            IsDelivered = item.IsDelivered
+                        });
+                    }
+                }
+
+                ordersWithDetailsDtos.Add(new OrderWithDetailsDto
+                {
+                    Id = order.Id,
+                    CustomerId = order.CustomerId,
+                    Items = detailedItems,
+                    Status = order.Status,
+                    Note = order.Note,
+                    CancellationReason = order.CancellationReason,
+                    CreatedAt = order.CreatedAt,
+                    TotalValue = await CalculateTotalValueAsync(order) // Reuse existing logic
+                });
+            }
+
+            return ordersWithDetailsDtos;
+        }
+
 
         // Helper method to map Order to OrderDto
         private OrderDto MapToOrderDto(Order order, decimal totalValue)

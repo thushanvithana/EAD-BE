@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for ecommerceapp2-patient-thunder-9872 on 2024-10-03T04:18:13+05:30
+# fly.toml app configuration file generated for ecommerceapp2-still-field-5715 on 2024-10-05T23:16:12+05:30
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'ecommerceapp2-patient-thunder-9872'
+app = 'ecommerceapp2-still-field-5715'
 
 [build]
 

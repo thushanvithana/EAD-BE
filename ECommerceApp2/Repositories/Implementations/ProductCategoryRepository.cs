@@ -1,5 +1,4 @@
-﻿
-using ECommerceApp2.Models;
+﻿using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
 using MongoDB.Driver;
 using System.Collections.Generic;

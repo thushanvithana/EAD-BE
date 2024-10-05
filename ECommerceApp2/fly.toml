@@ -1,10 +1,9 @@
-# fly.toml app configuration file generated for ecommerceapp2-patient-dream-7581 on 2024-10-03T00:21:30+05:30
+# fly.toml app configuration file generated for ecommerceapp2-falling-dawn-6896 on 2024-10-05T23:12:18+05:30
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'ecommerceapp2-patient-dream-7581'
-primary_region = 'sin'
+app = 'ecommerceapp2-falling-dawn-6896'
 
 [build]
 

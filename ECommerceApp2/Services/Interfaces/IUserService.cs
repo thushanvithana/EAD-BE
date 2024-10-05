@@ -16,5 +16,8 @@ namespace ECommerceApp2.Services.Interfaces
         // New Methods
         Task ActivateUser(string id);
         Task DeactivateUser(string id);
+
+        Task<IEnumerable<User>> GetActivatedUsers(); // Add this line
+        Task<IEnumerable<User>> GetDeactivatedUsers(); // Add this line
     }
 }

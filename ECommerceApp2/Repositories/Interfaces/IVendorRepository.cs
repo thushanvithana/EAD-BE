@@ -11,5 +11,6 @@ namespace ECommerceApp2.Repositories.Interfaces
         Task CreateVendorAsync(Vendor vendor);
         Task UpdateVendorAsync(Vendor vendor);
         Task DeleteVendorAsync(string vendorId);
+
     }
 }

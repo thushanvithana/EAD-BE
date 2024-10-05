@@ -1,5 +1,4 @@
-﻿
-using ECommerceApp2.Models;
+﻿using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;
 using System.Collections.Generic;

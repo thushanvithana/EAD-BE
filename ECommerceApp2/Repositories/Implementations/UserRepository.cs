@@ -45,6 +45,26 @@ namespace ECommerceApp2.Repositories.Implementations
             await _users.DeleteOneAsync(user => user.Id == id);
         }
 
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await _users.Find(u => u.Id == userId).FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<User>> GetActivatedUsers()
+        {
+            return await _users.Find(user => user.IsActive).ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetDeactivatedUsers()
+        {
+            return await _users.Find(user => !user.IsActive).ToListAsync();
+        }
+
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _users.Find(u => u.Email == email).FirstOrDefaultAsync();
+        }
+
         // Optional: Specific Method Implementation
         public async Task UpdateUserStatus(string id, bool isActive)
         {

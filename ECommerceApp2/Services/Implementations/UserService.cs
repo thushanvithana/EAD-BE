@@ -34,13 +34,13 @@ namespace ECommerceApp2.Services.Implementations
 
             // Send confirmation email with stylish HTML
             var subject = "Registration Successful";
-            var message = GetStylishEmailBody(user.Username);
+            var message = GetStylishEmailBody(user.FirstName);
             await _emailService.SendEmailAsync(user.Email, subject, message);
 
             return user;
         }
 
-        private string GetStylishEmailBody(string username)
+        private string GetStylishEmailBody(string firstName)
         {
             return $@"
 <!DOCTYPE html>
@@ -120,7 +120,7 @@ namespace ECommerceApp2.Services.Implementations
         <!-- Content -->
         <tr>
             <td class=""content"">
-                <h2>Welcome, {username}!</h2>
+                <h2>Welcome, {firstName}!</h2>
                 <p>Thank you for registering at <strong>ECommerceApp2</strong>. We're excited to have you on board.</p>
                 <p>Get started by exploring our wide range of products tailored just for you.</p>
                 <a href=""https://yourdomain.com/login"" class=""cta-button"">Shop Now</a>
@@ -164,8 +164,25 @@ namespace ECommerceApp2.Services.Implementations
             return await _userRepository.GetAllUsers();
         }
 
+
+        public async Task<IEnumerable<User>> GetActivatedUsers()
+        {
+            return await _userRepository.GetActivatedUsers();
+        }
+
+        public async Task<IEnumerable<User>> GetDeactivatedUsers()
+        {
+            return await _userRepository.GetDeactivatedUsers();
+        }
+
         public async Task UpdateUser(User user)
         {
+            // Optionally, handle password hashing if password is updated
+            if (!string.IsNullOrEmpty(user.Password))
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            }
+
             await _userRepository.UpdateUser(user);
         }
 
