@@ -91,6 +91,15 @@ namespace ECommerceApp2.Controllers
         }
 
 
+        [HttpGet("GetDetailedOrderById/{id}")]
+        public async Task<ActionResult<OrderWithDetailsDto>> GetDetailedOrderById(string id)
+        {
+            var detailedOrder = await _orderService.GetDetailedOrderByIdAsync(id);
+            if (detailedOrder == null)
+                return NotFound();
+            return Ok(detailedOrder);
+        }
+
 
         [HttpPost("{id}/ready-for-delivery")]
         public async Task<ActionResult> MarkItemAsReadyForDelivery(string id, [FromQuery] string productId, [FromQuery] string vendorId)

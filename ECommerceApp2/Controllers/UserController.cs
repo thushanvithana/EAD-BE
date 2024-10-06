@@ -31,7 +31,7 @@ namespace ECommerceApp2.Controllers
                     Password = registerRequest.Password,
                     Role = registerRequest.Role,
                     FirstName = registerRequest.FirstName,
-                    LastName = registerRequest.LastName, 
+                    LastName = registerRequest.LastName,
                     Address = registerRequest.Address, // Single string
                     PhoneNumber = registerRequest.PhoneNumber,
                     Gender = registerRequest.Gender
@@ -110,6 +110,22 @@ namespace ECommerceApp2.Controllers
             }
         }
 
+
+        [HttpPut("{id}")]
+        // [Authorize(Roles = "Administrator")] // Uncomment to secure the endpoint
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserRequest updateRequest)
+        {
+            try
+            {
+                await _userService.UpdateUser(id, updateRequest);
+                return Ok(new { message = "User updated successfully." });
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         // New Endpoint: Deactivate User
         [HttpPost("{id}/deactivate")]
         // [Authorize(Roles = "Administrator")] // Uncomment to secure the endpoint
@@ -126,73 +142,50 @@ namespace ECommerceApp2.Controllers
             }
         }
 
-        // Optional: Update User Endpoint
-        [HttpPut("{id}")]
-        // [Authorize(Roles = "Administrator")] // Uncomment to secure the endpoint
-        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserRequest updateUserRequest)
+        // DTOs
+        // DTOs
+        public class LoginRequest
         {
-            try
-            {
-                var user = new User
-                {
-                    Id = id,
-                    Username = updateUserRequest.Username,
-                    Email = updateUserRequest.Email,
-                    Role = updateUserRequest.Role,
-                    FirstName = updateUserRequest.FirstName,
-                    LastName = updateUserRequest.LastName,
-                    Address = updateUserRequest.Address, // Single string
-                    PhoneNumber = updateUserRequest.PhoneNumber,
-                    Gender = updateUserRequest.Gender,
-                    IsActive = updateUserRequest.IsActive
-                };
-
-                await _userService.UpdateUser(user);
-                return Ok(new { message = "User updated successfully." });
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            public string Email { get; set; }
+            public string Password { get; set; }
         }
-    }
 
-    public class LoginRequest
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
+        public class RegisterRequest
+        {
+            public string Username { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public UserRole Role { get; set; }
 
-    // New DTO for Registration
-    public class RegisterRequest
-    {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public UserRole Role { get; set; }
+            // New Fields
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Address { get; set; } // Single string
+            public string PhoneNumber { get; set; }
+            public Gender Gender { get; set; }
+        }
 
-        // New Fields
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; } // Single string
-        public string PhoneNumber { get; set; }
-        public Gender Gender { get; set; }
-    }
+        // New DTO for Updating User (Password excluded)
+        public class UpdateUserRequest
+        {
+            public string Username { get; set; }
+            public string Email { get; set; }
+            public UserRole Role { get; set; }
 
-    // Optional DTO for Updating User
-    public class UpdateUserRequest
-    {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public UserRole Role { get; set; }
+            // New Fields
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Address { get; set; } // Single string
+            public string PhoneNumber { get; set; }
+            public Gender Gender { get; set; }
+        }
 
-        // New Fields
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; } // Single string
-        public string PhoneNumber { get; set; }
-        public Gender Gender { get; set; }
 
-        public bool IsActive { get; set; }
+
+
+
+
+
+
     }
 }

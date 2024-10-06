@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for ecommerceapp2-still-field-5715 on 2024-10-05T23:16:12+05:30
+# fly.toml app configuration file generated for ecommerceapp2-floral-water-1036 on 2024-10-06T16:43:21+05:30
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'ecommerceapp2-still-field-5715'
+app = 'ecommerceapp2-floral-water-1036'
 
 [build]
 

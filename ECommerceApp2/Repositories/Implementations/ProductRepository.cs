@@ -70,5 +70,9 @@ namespace ECommerceApp2.Repositories.Implementations
             var update = Builders<Product>.Update.Set(p => p.IsActive, false);
             await _products.UpdateOneAsync(p => p.ProductId == productId, update);
         }
+
+
+
+
     }
 }

@@ -13,12 +13,9 @@ namespace ECommerceApp2.Repositories.Interfaces
         Task AddUser(User user);
         Task UpdateUser(User user);
         Task DeleteUser(string id);
-
-        // Optional: Specific Methods
-        Task UpdateUserStatus(string id, bool isActive);
         Task<User> GetUserByEmailAsync(string email);
-
         Task<IEnumerable<User>> GetActivatedUsers();
         Task<IEnumerable<User>> GetDeactivatedUsers();
+
     }
 }

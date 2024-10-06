@@ -65,11 +65,5 @@ namespace ECommerceApp2.Repositories.Implementations
             return await _users.Find(u => u.Email == email).FirstOrDefaultAsync();
         }
 
-        // Optional: Specific Method Implementation
-        public async Task UpdateUserStatus(string id, bool isActive)
-        {
-            var update = Builders<User>.Update.Set(u => u.IsActive, isActive);
-            await _users.UpdateOneAsync(u => u.Id == id, update);
-        }
     }
 }

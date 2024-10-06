@@ -279,6 +279,60 @@ namespace ECommerceApp2.Services.Implementations
         }
 
 
+
+        public async Task<OrderWithDetailsDto> GetDetailedOrderByIdAsync(string orderId)
+        {
+            var order = await _orderRepository.GetOrderByIdAsync(orderId);
+            if (order == null)
+                return null;
+
+            var detailedItems = new List<OrderItemWithDetailsDto>();
+
+            foreach (var item in order.Items)
+            {
+                var product = await _productRepository.GetProductByIdAsync(item.ProductId);
+                var vendor = await _userRepository.GetUserByIdAsync(item.VendorId);
+
+                if (product != null && vendor != null)
+                {
+                    detailedItems.Add(new OrderItemWithDetailsDto
+                    {
+                        Product = new ProductDto
+                        {
+                            ProductId = product.ProductId,
+                            Name = product.Name,
+                            Price = product.Price,
+                            Description = product.Description,
+                            Stock = product.Stock,
+                            ImageUrls = product.ImageUrls
+                        },
+                        Vendor = new VendorDto
+                        {
+                            VendorId = vendor.Id,
+                            VendorName = $"{vendor.FirstName} {vendor.LastName}",
+                            Email = vendor.Email,
+                            PhoneNumber = vendor.PhoneNumber
+                        },
+                        Quantity = item.Quantity,
+                        IsDelivered = item.IsDelivered
+                    });
+                }
+            }
+
+            return new OrderWithDetailsDto
+            {
+                Id = order.Id,
+                CustomerId = order.CustomerId,
+                Items = detailedItems,
+                Status = order.Status,
+                CancellationReason = order.CancellationReason,
+                Note = order.Note,
+                CreatedAt = order.CreatedAt,
+                TotalValue = await CalculateTotalValueAsync(order)
+            };
+        }
+
+
         // Helper method to map Order to OrderDto
         private OrderDto MapToOrderDto(Order order, decimal totalValue)
         {

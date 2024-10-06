@@ -4,15 +4,19 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
+
+
 namespace ECommerceApp2.Repositories.Implementations
 {
     public class ProductCategoryRepository : IProductCategoryRepository
     {
         private readonly IMongoCollection<ProductCategory> _productCategories;
-
-        public ProductCategoryRepository(IMongoDatabase database)
+        private readonly IMongoClient _mongoClient;
+        public ProductCategoryRepository(IMongoDatabase database, IMongoClient mongoClient)
         {
             _productCategories = database.GetCollection<ProductCategory>("ProductCategories");
+            _mongoClient = mongoClient;
         }
 
         public async Task<IEnumerable<ProductCategory>> GetAllAsync()
@@ -54,8 +58,68 @@ namespace ECommerceApp2.Repositories.Implementations
 
         public async Task AddProductToCategoryAsync(string categoryId, Product product)
         {
-            var update = Builders<ProductCategory>.Update.AddToSet(c => c.Products, product);
-            await _productCategories.UpdateOneAsync(c => c.Id == categoryId, update);
+            using (var session = await _mongoClient.StartSessionAsync())
+            {
+                session.StartTransaction();
+
+                try
+                {
+                    var update = Builders<ProductCategory>.Update.AddToSet(c => c.Products, product);
+                    await _productCategories.UpdateOneAsync(session, c => c.Id == categoryId, update);
+
+                    // Commit the transaction
+                    await session.CommitTransactionAsync();
+                }
+                catch
+                {
+                    // Abort the transaction on error
+                    await session.AbortTransactionAsync();
+                    throw;
+                }
+            }
         }
+
+
+        public async Task<IEnumerable<ProductCategory>> GetActiveCategoriesAsync()
+        {
+            var filter = Builders<ProductCategory>.Filter.Eq(c => c.IsActive, true);
+            return await _productCategories.Find(filter).ToListAsync();
+        }
+
+        public async Task<IEnumerable<ProductCategory>> GetInactiveCategoriesAsync()
+        {
+            var filter = Builders<ProductCategory>.Filter.Eq(c => c.IsActive, false);
+            return await _productCategories.Find(filter).ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<CategoryProductCount>> GetProductCountPerCategoryAsync()
+        {
+            var aggregate = _productCategories.Aggregate()
+                .Project(c => new CategoryProductCount
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.Name,
+                    ProductCount = c.Products.Count
+                });
+
+            return await aggregate.ToListAsync();
+        }
+
+        public async Task<int> GetTotalCategoryCountAsync()
+        {
+            return (int)await _productCategories.CountDocumentsAsync(FilterDefinition<ProductCategory>.Empty);
+        }
+
+
+
+        // New method implementation to get active categories
+        public async Task<IEnumerable<ProductCategory>> GetActiveCategoriesAsyncq()
+        {
+            var filter = Builders<ProductCategory>.Filter.Eq(c => c.IsActive, true);
+            return await _productCategories.Find(filter).ToListAsync();
+        }
+
+
     }
 }

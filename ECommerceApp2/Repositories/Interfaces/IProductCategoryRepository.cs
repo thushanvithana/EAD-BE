@@ -16,5 +16,14 @@ namespace ECommerceApp2.Repositories.Interfaces
 
         // Add product to a specific category
         Task AddProductToCategoryAsync(string categoryId, Product product);
+
+        Task<IEnumerable<ProductCategory>> GetActiveCategoriesAsync();
+        Task<IEnumerable<ProductCategory>> GetInactiveCategoriesAsync();
+
+
+        Task<IEnumerable<ProductCategory>> GetActiveCategoriesAsyncq();
+
+        Task<IEnumerable<CategoryProductCount>> GetProductCountPerCategoryAsync();
+        Task<int> GetTotalCategoryCountAsync();
     }
 }

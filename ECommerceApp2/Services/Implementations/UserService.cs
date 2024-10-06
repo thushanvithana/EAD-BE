@@ -3,6 +3,7 @@ using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static ECommerceApp2.Controllers.UserController;
 
 namespace ECommerceApp2.Services.Implementations
 {
@@ -175,17 +176,6 @@ namespace ECommerceApp2.Services.Implementations
             return await _userRepository.GetDeactivatedUsers();
         }
 
-        public async Task UpdateUser(User user)
-        {
-            // Optionally, handle password hashing if password is updated
-            if (!string.IsNullOrEmpty(user.Password))
-            {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            }
-
-            await _userRepository.UpdateUser(user);
-        }
-
         public async Task DeleteUser(string id)
         {
             await _userRepository.DeleteUser(id);
@@ -204,6 +194,7 @@ namespace ECommerceApp2.Services.Implementations
             await _userRepository.UpdateUser(user);
         }
 
+
         public async Task DeactivateUser(string id)
         {
             var user = await _userRepository.GetUserById(id);
@@ -213,6 +204,28 @@ namespace ECommerceApp2.Services.Implementations
             }
 
             user.IsActive = false;
+            await _userRepository.UpdateUser(user);
+        }
+
+
+        public async Task UpdateUser(string id, UpdateUserRequest updateRequest)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                throw new System.Exception("User not found");
+            }
+
+            // Update fields except Password
+            user.Username = updateRequest.Username;
+            user.Email = updateRequest.Email;
+            user.Role = updateRequest.Role;
+            user.FirstName = updateRequest.FirstName;
+            user.LastName = updateRequest.LastName;
+            user.Address = updateRequest.Address;
+            user.PhoneNumber = updateRequest.PhoneNumber;
+            user.Gender = updateRequest.Gender;
+
             await _userRepository.UpdateUser(user);
         }
     }

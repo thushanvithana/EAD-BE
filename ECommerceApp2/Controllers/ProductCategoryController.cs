@@ -67,12 +67,110 @@ namespace ECommerceApp2.Controllers
             return Ok();
         }
 
-        // New endpoint to add product to category
         [HttpPost("{categoryId}/products")]
-        public async Task<IActionResult> AddProductToCategoryAsync(string categoryId, Product product)
+        public async Task<IActionResult> AddProductToCategoryAsync(string categoryId, [FromBody] Product product)
         {
-            await _productCategoryService.AddProductToCategoryAsync(categoryId, product);
-            return Ok();
+            if (product == null)
+                return BadRequest("Product data is null.");
+
+            try
+            {
+                await _productCategoryService.AddProductToCategoryAsync(categoryId, product);
+                return Ok(new { Message = "Product added to category successfully.", Product = product });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+           // New endpoint to get all active product categories
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveCategoriesAsync()
+        {
+            try
+            {
+                var activeCategories = await _productCategoryService.GetActiveCategoriesAsync();
+                return Ok(activeCategories);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // New endpoint to get all inactive product categories
+        [HttpGet("inactive")]
+        public async Task<IActionResult> GetInactiveCategoriesAsync()
+        {
+            try
+            {
+                var inactiveCategories = await _productCategoryService.GetInactiveCategoriesAsync();
+                return Ok(inactiveCategories);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+        // New endpoint to get count of products in each category
+        [HttpGet("product-count")]
+        public async Task<IActionResult> GetProductCountPerCategoryAsync()
+        {
+            try
+            {
+                var productCounts = await _productCategoryService.GetProductCountPerCategoryAsync();
+                return Ok(productCounts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // New endpoint to get total count of categories created
+        [HttpGet("category-count")]
+        public async Task<IActionResult> GetTotalCategoryCountAsync()
+        {
+            try
+            {
+                var totalCount = await _productCategoryService.GetTotalCategoryCountAsync();
+                var response = new CategoryCountResponse
+                {
+                    CategoryCount = totalCount
+                };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        // New endpoint to get active category product data with specific product details
+        [HttpGet("active-products")]
+        public async Task<IActionResult> GetActiveCategoriesWithProductDetailsAsync()
+        {
+            try
+            {
+                var data = await _productCategoryService.GetActiveCategoriesWithProductDetailsAsync();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

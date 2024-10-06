@@ -16,6 +16,7 @@ namespace ECommerceApp2.Services.Interfaces
         Task<OrderWithDetailsDto> GetOrderWithDetailsByIdAsync(string orderId);
         Task<Order> CreateOrderWithEmailAsync(CreateOrderRequest request);
 
+        Task<OrderWithDetailsDto> GetDetailedOrderByIdAsync(string orderId);
         Task<IEnumerable<OrderWithDetailsDto>> GetAllOrdersWithDetailsAsync();
 
 
