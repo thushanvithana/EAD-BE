@@ -1,4 +1,17 @@
-﻿// ECommerceApp2.Repositories.Implementations/InventoryRepository.cs
+﻿/*
+ * File Name: InventoryRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IInventoryRepository interface for managing inventory records in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve inventory by product ID
+ *              - Create a new inventory record
+ *              - Update an existing inventory record
+ *              - Delete inventory by product ID
+ *              - Retrieve a list of inventories with low stock levels based on the defined threshold
+ *              Uses MongoDB.Driver to interact with the "Inventories" collection in the specified database.
+ */
+// ECommerceApp2.Repositories.Implementations/InventoryRepository.cs
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;

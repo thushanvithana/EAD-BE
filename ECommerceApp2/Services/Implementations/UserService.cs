@@ -1,4 +1,12 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: UserService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implements the IUserService interface, providing the concrete logic
+ *              for user-related business operations, including validation and service calls.
+ */
+
+using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;
 using System.Collections.Generic;

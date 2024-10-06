@@ -1,4 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ * File Name: CartService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the ICartService interface for managing shopping cart operations
+ *              in the e-commerce application. This service provides methods to:
+ *              - Retrieve a cart by user ID (creating one if it doesn't exist)
+ *              - Add items to the cart
+ *              - Remove items from the cart
+ *              - Clear all items from the cart
+ *              The service interacts with the ICartRepository to persist changes to the database.
+ */
+using System.Threading.Tasks;
 using System.Linq;
 using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;

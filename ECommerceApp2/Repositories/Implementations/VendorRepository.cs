@@ -1,4 +1,18 @@
-﻿using MongoDB.Driver;
+﻿/*
+ * File Name: VendorRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IVendorRepository interface for managing vendor information in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve a vendor by its ID
+ *              - Retrieve all vendors
+ *              - Create a new vendor
+ *              - Update an existing vendor
+ *              - Delete a vendor by its ID
+ *              Utilizes MongoDB.Driver for operations on the "Vendors" collection in the specified database.
+ */
+
+using MongoDB.Driver;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;

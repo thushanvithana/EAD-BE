@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ * File Name: ProductService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IProductService interface to manage products in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Retrieve products by ID or vendor ID.
+ *              - Create, update, and delete products in the inventory.
+ *              - Retrieve all products, active products, and deactivated products.
+ *              - Activate or deactivate products based on their current status.
+ *              - Add or remove image URLs associated with products.
+ *              The service utilizes an injected repository (IProductRepository) 
+ *              to interact with the underlying data store, ensuring efficient product management.
+ */
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;

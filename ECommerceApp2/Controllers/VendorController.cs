@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File Name: VendorController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller responsible for handling HTTP requests related to vendors,
+ *              including operations such as retrieving vendor details by ID, listing all vendors, 
+ *              creating new vendors, updating existing vendors, and deleting vendors. It interfaces 
+ *              with the IVendorService to perform business logic and return appropriate HTTP responses.
+ */
+
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

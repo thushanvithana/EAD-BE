@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File Name: CartController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller that handles HTTP requests related to the shopping cart
+ *              operations, including retrieving the cart by user ID, adding items to the cart,
+ *              removing items, and clearing the entire cart. Utilizes dependency injection 
+ *              to access the ICartService for business logic.
+ */
+
+using Microsoft.AspNetCore.Mvc;
 
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

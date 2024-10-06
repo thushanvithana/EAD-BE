@@ -1,4 +1,17 @@
 ﻿// ECommerceApp2.Services.Implementations/InventoryService.cs
+/*
+ * File Name: InventoryService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IInventoryService interface to manage product inventories in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Get inventory details by product ID.
+ *              - Create, update, and delete inventory records.
+ *              - Check stock availability and adjust stock levels (increase/decrease).
+ *              - Fetch low stock products and their details.
+ *              The service utilizes an injected IProductService to retrieve product information and ensure
+ *              proper management of inventory levels.
+ */
 using ECommerceApp2.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;

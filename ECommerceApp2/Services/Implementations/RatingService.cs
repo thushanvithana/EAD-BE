@@ -1,4 +1,18 @@
-﻿
+﻿/*
+ * File Name: RatingService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IRatingService interface to manage ratings for vendors in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Create a new rating for a specific vendor.
+ *              - Update an existing rating, ensuring the vendor's average rating is recalculated.
+ *              - Delete a rating and update the vendor's average rating accordingly.
+ *              - Retrieve all ratings associated with a specific vendor by vendor ID.
+ *              - Calculate the average rating of a vendor based on all associated ratings.
+ *              The service utilizes injected repositories (IRatingRepository, IVendorRepository)
+ *              to interact with the underlying data store and ensure proper rating management.
+ */
+
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;

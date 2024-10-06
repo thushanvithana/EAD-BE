@@ -1,4 +1,15 @@
 ﻿
+/*
+ * File Name: ProductCategoryController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller responsible for handling HTTP requests related to product categories,
+ *              including operations such as retrieving all categories, adding, updating, and deleting 
+ *              categories, activating or deactivating categories, and managing products within categories. 
+ *              It interfaces with the IProductCategoryService to perform business logic and return 
+ *              appropriate HTTP responses.
+ */
+
 using ECommerceApp2.Models;
 using ECommerceApp2.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;

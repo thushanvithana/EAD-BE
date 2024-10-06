@@ -1,4 +1,22 @@
-﻿
+﻿/*
+ * File Name: ProductRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IProductRepository interface for managing products in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve a product by its ID
+ *              - Retrieve products by vendor ID
+ *              - Create a new product
+ *              - Update an existing product
+ *              - Delete a product by its ID
+ *              - Retrieve all products
+ *              - Retrieve all active products
+ *              - Retrieve all deactivated products
+ *              - Activate a product by its ID
+ *              - Deactivate a product by its ID
+ *              Utilizes MongoDB.Driver for operations on the "Products" collection in the specified database.
+ */
+
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Models;
 using MongoDB.Driver;

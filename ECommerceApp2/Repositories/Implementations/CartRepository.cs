@@ -1,4 +1,16 @@
 ﻿
+/*
+ * File Name: CartRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the ICartRepository interface for managing shopping carts in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve a cart by user ID
+ *              - Create a new cart
+ *              - Update an existing cart
+ *              - Delete a cart by its ID
+ *              Uses MongoDB.Driver to interact with the "Carts" collection in the specified database.
+ */
 using MongoDB.Driver;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

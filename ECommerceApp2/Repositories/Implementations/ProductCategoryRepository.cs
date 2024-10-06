@@ -1,11 +1,27 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: ProductCategoryRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IProductCategoryRepository interface for managing product categories in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve all product categories
+ *              - Retrieve a product category by its ID
+ *              - Add a new product category
+ *              - Update an existing product category
+ *              - Delete a product category by its ID
+ *              - Activate or deactivate a product category
+ *              - Add a product to a specific category within a transaction
+ *              - Retrieve active and inactive product categories
+ *              - Get the count of products per category
+ *              - Get the total number of categories
+ *              Utilizes MongoDB.Driver for operations on the "ProductCategories" collection in the specified database.
+ */
+
+using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-
-
 
 namespace ECommerceApp2.Repositories.Implementations
 {

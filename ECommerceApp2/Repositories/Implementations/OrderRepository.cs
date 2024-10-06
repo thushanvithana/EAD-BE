@@ -1,4 +1,19 @@
-﻿using MongoDB.Driver;
+﻿/*
+ * File Name: OrderRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IOrderRepository interface for managing order records in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve an order by its ID
+ *              - Retrieve all orders placed by a specific customer
+ *              - Retrieve all orders in the system
+ *              - Create a new order record
+ *              - Update an existing order record
+ *              - Delete an order by its ID
+ *              Uses MongoDB.Driver to interact with the "Orders" collection in the specified database.
+ */
+
+using MongoDB.Driver;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;

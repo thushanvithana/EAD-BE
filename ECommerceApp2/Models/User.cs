@@ -1,4 +1,11 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: User.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Defines the User model with properties that map to the user-related data 
+ *              in the application, including fields like UserID, Username, Email, etc.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 

@@ -1,4 +1,12 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: UserRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implements the IUserRepository interface, providing the concrete logic
+ *              for interacting with the database for user-related data operations.
+ */
+
+using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
 using MongoDB.Driver;
 using System.Collections.Generic;

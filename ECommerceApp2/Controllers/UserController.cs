@@ -1,4 +1,12 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: UserController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller that handles HTTP requests related to user operations,
+ *              including registration, authentication, and user management actions.
+ */
+
+using ECommerceApp2.Models;
 using ECommerceApp2.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization; // Add if using authorization
 using Microsoft.AspNetCore.Mvc;

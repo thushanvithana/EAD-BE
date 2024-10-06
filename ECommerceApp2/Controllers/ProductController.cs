@@ -1,4 +1,14 @@
 ﻿
+/*
+ * File Name: ProductController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller responsible for handling HTTP requests related to products, 
+ *              including operations such as retrieving products by ID and vendor, creating, updating,
+ *              deleting products, activating or deactivating products, and managing product images. 
+ *              It interfaces with the IProductService to perform business logic and return 
+ *              appropriate HTTP responses.
+ */
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -141,9 +151,6 @@ namespace ECommerceApp.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
-
-
 
         // DELETE api/product/{productId}/images
         [HttpDelete("{productId}/images")]

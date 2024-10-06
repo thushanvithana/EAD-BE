@@ -9,7 +9,9 @@ C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Azure.Core.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Azure.Identity.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\BCrypt.Net-Next.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\BouncyCastle.Cryptography.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\DnsClient.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\MailKit.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
@@ -34,6 +36,7 @@ C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.SqlServer.Server.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\MimeKit.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\MongoDB.Bson.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\MongoDB.Driver.dll
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\PubTmp\Out\MongoDB.Driver.Core.dll

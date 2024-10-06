@@ -1,3 +1,11 @@
+/*
+ * File Name: Program.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Entry point for the application, configuring services and middleware, 
+ *              and starting the web server to handle requests.
+ */
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -1,4 +1,14 @@
 ﻿// ECommerceApp.Controllers/InventoryController.cs
+/*
+ * File Name: InventoryController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller that manages inventory-related operations, including
+ *              creating, updating, retrieving, and deleting inventory items. The controller
+ *              also provides an endpoint for retrieving products that are below the low stock 
+ *              threshold, ensuring effective inventory management.
+ */
+
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

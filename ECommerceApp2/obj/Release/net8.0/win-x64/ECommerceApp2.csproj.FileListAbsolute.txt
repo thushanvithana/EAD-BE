@@ -136,3 +136,6 @@ C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\ECommerceApp2.pdb
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\ECommerceApp2.genruntimeconfig.cache
 C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\obj\Release\net8.0\win-x64\ref\ECommerceApp2.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\bin\Release\net8.0\win-x64\BouncyCastle.Cryptography.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\bin\Release\net8.0\win-x64\MailKit.dll
+C:\Users\thush\source\repos\ECommerceApp2\ECommerceApp2\bin\Release\net8.0\win-x64\MimeKit.dll

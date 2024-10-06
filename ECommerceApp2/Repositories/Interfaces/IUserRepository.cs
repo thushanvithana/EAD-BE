@@ -1,4 +1,12 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: IUserRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Interface defining the contract for user-related data access methods,
+ *              including CRUD operations and any other specific queries related to users.
+ */
+
+using ECommerceApp2.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

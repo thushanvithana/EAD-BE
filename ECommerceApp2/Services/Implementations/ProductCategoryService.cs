@@ -1,4 +1,20 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: ProductCategoryService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IProductCategoryService interface to manage product categories in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Retrieve all product categories or a specific category by its ID.
+ *              - Add new product categories and update existing ones.
+ *              - Delete product categories and manage their active/inactive status.
+ *              - Activate or deactivate product categories and their associated products.
+ *              - Add products to a specific category and retrieve active/inactive categories.
+ *              - Get product counts per category and the total number of categories.
+ *              - Retrieve active categories along with their product details for better management and display.
+ *              The service utilizes injected repositories (IProductCategoryRepository, IProductService)
+ *              to interact with the underlying data store and ensure proper category management.
+ */
+using ECommerceApp2.Models;
 using ECommerceApp2.Models.DTOs;
 using ECommerceApp2.Repositories.Interfaces;
 using ECommerceApp2.Services.Interfaces;

@@ -1,4 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File Name: RatingController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller responsible for handling HTTP requests related to ratings,
+ *              including operations such as retrieving ratings by vendor, calculating average 
+ *              ratings, creating, updating, and deleting ratings. It interfaces with the IRatingService 
+ *              to perform business logic and return appropriate HTTP responses.
+ */
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;

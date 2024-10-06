@@ -1,4 +1,19 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * File Name: OrderService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IOrderService interface to manage customer orders in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Create orders with items for a specific customer.
+ *              - Retrieve orders by customer ID or order ID, including detailed order information.
+ *              - Update existing orders and mark items as ready for delivery.
+ *              - Cancel orders with a reason if they are in the processing status.
+ *              - Calculate the total value of orders based on item prices and quantities.
+ *              - Provide detailed information about orders, including associated products and vendors.
+ *              The service utilizes injected repositories (IOrderRepository, IProductRepository, IUserRepository)
+ *              to interact with the underlying data store and ensure proper order management.
+ */
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

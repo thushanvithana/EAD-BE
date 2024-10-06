@@ -1,4 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File Name: OrderController.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: ASP.NET Controller that handles HTTP requests related to order operations, 
+ *              including creating, updating, retrieving, and deleting orders. It interfaces 
+ *              with the IOrderService to perform business logic and return appropriate HTTP responses.
+ */
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ECommerceApp2.Models;

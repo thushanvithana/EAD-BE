@@ -1,4 +1,17 @@
-﻿
+﻿/*
+ * File Name: RatingRepository.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IRatingRepository interface for managing product ratings in the MongoDB database.
+ *              This repository provides methods to:
+ *              - Retrieve a rating by its ID
+ *              - Retrieve ratings associated with a specific vendor ID
+ *              - Create a new rating
+ *              - Update an existing rating
+ *              - Delete a rating by its ID
+ *              Utilizes MongoDB.Driver for operations on the "Ratings" collection in the specified database.
+ */
+
 using MongoDB.Driver;
 using System.Threading.Tasks;
 using System.Collections.Generic;

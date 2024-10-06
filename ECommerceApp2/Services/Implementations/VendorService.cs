@@ -1,4 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ * File Name: VendorService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Implementation of the IVendorService interface to manage vendor operations in the e-commerce application.
+ *              This service provides functionality to:
+ *              - Add and update vendor ratings based on customer feedback.
+ *              - Retrieve vendor information by vendor ID.
+ *              - Retrieve a list of all vendors in the system.
+ *              - Create new vendor profiles in the application.
+ *              - Update existing vendor profiles with new information.
+ *              - Delete vendor profiles from the system.
+ *              The service utilizes the IVendorRepository interface to interact with the underlying data store 
+ *              and ensure efficient vendor management.
+ */
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;
 using ECommerceApp2.Repositories.Interfaces;
