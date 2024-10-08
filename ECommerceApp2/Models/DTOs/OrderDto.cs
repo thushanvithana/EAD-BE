@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ * File Name: OrderDto.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Data Transfer Object (DTO) representing an order.
+ *              Contains details such as order ID, customer ID, order items, 
+ *              status, cancellation reason, note, created date, and total value.
+ *              This DTO is used for transferring order data between the API and the client.
+ *              
+ *              The OrderItemDto class represents individual items in an order, 
+ *              with product and vendor details, quantity, and delivery status.
+ */
+using System;
 using System.Collections.Generic;
 
 namespace ECommerceApp2.Models

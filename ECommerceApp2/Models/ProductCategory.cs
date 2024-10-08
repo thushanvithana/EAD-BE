@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: ProductCategory.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Model representing a product category in the e-commerce application.
+ *              Contains properties for category ID, name, active status, and a list of products.
+ *              The category ID is generated using a GUID by default to ensure uniqueness.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ * File Name: IProductService.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Defines the contract for product-related services in the e-commerce application, 
+ *              outlining methods for managing products, including their creation, retrieval, 
+ *              updates, and image management.
+ */
+ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ECommerceApp2.Models;
 

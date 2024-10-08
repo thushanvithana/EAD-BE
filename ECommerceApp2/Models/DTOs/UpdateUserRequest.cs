@@ -1,4 +1,14 @@
-﻿using ECommerceApp2.Models;
+﻿/*
+ * File Name: UpdateUserRequest.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Data Transfer Object (DTO) representing a request to update user information.
+ *              Contains fields such as username, email, role, first name, last name, address, 
+ *              phone number, gender, and active status.
+ *              This DTO is used for transferring user update data between the client and the API.
+ *              The password field is intentionally excluded to prevent editing.
+ */
+using ECommerceApp2.Models;
 
 namespace ECommerceApp2.Models.DTOs
 {

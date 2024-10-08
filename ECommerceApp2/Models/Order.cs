@@ -1,4 +1,15 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: Order.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Model representing an order in the e-commerce application.
+ *              Contains properties such as order ID, customer ID, items in the order,
+ *              order status, cancellation reason, notes, total value, and creation date.
+ *              Includes validation attributes to ensure data integrity.
+ *              The order ID is automatically generated, and the creation time is set to UTC.
+ *              The order status defaults to 'Processing' upon creation.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;

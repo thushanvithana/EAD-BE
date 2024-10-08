@@ -1,4 +1,14 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: Product.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Model representing a product in the e-commerce application.
+ *              Contains properties such as product ID, name, category, vendor ID,
+ *              active status, price, description, stock quantity, and a list of image URLs.
+ *              The product ID is generated using a GUID by default, and the active status
+ *              is set to true upon creation.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 

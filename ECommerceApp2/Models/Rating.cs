@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: Rating.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Model representing a rating given by a customer to a vendor in the e-commerce application.
+ *              Contains properties for the rating ID, vendor ID, customer ID, star rating (1 to 5), and a comment.
+ *              The rating ID is automatically generated using a MongoDB ObjectId to ensure uniqueness.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace ECommerceApp2.Models

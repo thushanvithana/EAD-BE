@@ -1,4 +1,13 @@
 ﻿
+/*
+ * File Name: Cart.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Model representing a shopping cart in the e-commerce application.
+ *              Contains properties such as the cart ID, user ID, and a list of items in the cart.
+ *              The cart ID is represented as an ObjectId in MongoDB.
+ *              This model is used for interacting with the cart data in the database.
+ */
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

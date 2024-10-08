@@ -1,4 +1,12 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * File Name: ProductDetailDto.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Data Transfer Object (DTO) representing detailed product information.
+ *              Contains details such as product ID, name, price, and a list of image URLs.
+ *              This DTO is used for transferring product detail data between the API and the client.
+ */
+using System.Collections.Generic;
 
 namespace ECommerceApp2.Models.DTOs
 {

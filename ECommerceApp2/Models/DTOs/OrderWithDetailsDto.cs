@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+ * File Name: OrderWithDetailsDto.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Data Transfer Object (DTO) representing an order with detailed product and vendor information.
+ *              Contains details such as order ID, customer ID, order items with product and vendor details, 
+ *              status, note, cancellation reason, created date, and total value.
+ *              
+ *              The OrderItemWithDetailsDto class represents an item within the order, 
+ *              including detailed product and vendor information, quantity, and delivery status.
+ *              
+ *              The ProductDto class represents product details, including product ID, name, price, description, 
+ *              stock, and image URLs.
+ *              
+ *              The VendorDto class represents vendor details, including vendor ID, vendor name, email, and phone number.
+ */
+using System;
 using System.Collections.Generic;
 
 namespace ECommerceApp2.Models

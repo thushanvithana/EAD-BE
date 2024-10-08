@@ -1,4 +1,13 @@
-﻿namespace ECommerceApp2.Models
+﻿/*
+ * File Name: RegisterRequest.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Data Transfer Object (DTO) representing a registration request for new users.
+ *              Contains user registration details such as username, email, password, role, 
+ *              and additional information like first name, last name, address, phone number, and gender.
+ *              This DTO is used for transferring registration data between the client and the API.
+ */
+namespace ECommerceApp2.Models
 {
     public class RegisterRequest
     {

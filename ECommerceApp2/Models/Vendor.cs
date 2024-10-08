@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * File Name: Vendor.cs
+ * Author: Thushan Vithana
+ * Date: October 6, 2024
+ * Description: Defines the Vendor model with properties that represent vendor-related 
+ *              data in the application, including fields like Id, Name, ProductIds, 
+ *              AverageRating, and TotalRatings.
+ */
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
